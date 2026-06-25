@@ -60,13 +60,13 @@
 }:
 
 let
-  version = "26-ga";
+  version = "26.0.1-ga";
 
   src = fetchFromGitHub {
     owner = "openjdk";
     repo = "jdk26u";
-    rev = "refs/tags/jdk-26-ga";
-    hash = "sha256-kR++u1rVL1SkAa9l657Qz/m+eONJsvmoag8ZpX1moug=";
+    rev = "refs/tags/jdk-26.0.1-ga";
+    hash = "sha256-mYy9XbZjFNkcI5LJZ7cXp+cUoPT35qtxasrD3YgUDoo=";
   };
 
   jdk-bootstrap' = jdk-bootstrap.override {
