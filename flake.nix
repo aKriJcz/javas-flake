@@ -1,7 +1,7 @@
 {
   description = "Java packages (OpenJDK 26 and beyond) as a nixpkgs overlay — Linux only";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
   outputs =
     { self, nixpkgs }:
@@ -37,14 +37,10 @@
           openjdk26_headless = pkgs.openjdk26_headless;
           jdk26 = pkgs.jdk26;
           jdk26_headless = pkgs.jdk26_headless;
-          temurin-bin-26 = pkgs.temurin-bin-26;
-          temurin-jre-bin-26 = pkgs.temurin-jre-bin-26;
           openjdk27 = pkgs.openjdk27;
           openjdk27_headless = pkgs.openjdk27_headless;
           jdk27 = pkgs.jdk27;
           jdk27_headless = pkgs.jdk27_headless;
-          temurin-bin-27 = pkgs.temurin-bin-27;
-          temurin-jre-bin-27 = pkgs.temurin-jre-bin-27;
           default = pkgs.openjdk27;
         }
       );

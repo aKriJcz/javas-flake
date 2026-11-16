@@ -48,7 +48,8 @@
   setJavaClassPath,
   versionCheckHook,
 
-  # JDK 26 is bootstrapped with the Temurin 25 binary from nixpkgs.
+  # JDK 26 needs a boot JDK 25 or 26; by default it is bootstrapped with the
+  # Temurin 25 binary from nixpkgs.
   temurin-bin-25,
   jdk-bootstrap ? temurin-bin-25.__spliced.buildBuild or temurin-bin-25,
 
@@ -69,10 +70,22 @@ let
     hash = "sha256-HlFXV3F8N6HsgWsbfY9hnPz9M1NYZPprft+zvd4XL3k=";
   };
 
-  jdk-bootstrap' = jdk-bootstrap.override {
-    # When building a headless jdk, also bootstrap it with a headless jdk.
-    gtkSupport = !headless;
-  };
+  # The boot JDK can be any package with a `home` attribute, chosen with
+  # `.override { jdk-bootstrap = ...; }` — e.g. to use a prebuilt JDK and save
+  # build time, or one that is already in the store. Its version must be one
+  # the build accepts (make/conf/version-numbers.conf).
+  #
+  # When building a headless jdk, also bootstrap it with a headless jdk, if the
+  # chosen one can be switched: our own builders take `headless`, nixpkgs'
+  # Temurin takes `gtkSupport`.
+  bootstrapArgs = lib.functionArgs (jdk-bootstrap.override or (_: jdk-bootstrap));
+  jdk-bootstrap' =
+    if bootstrapArgs ? headless then
+      jdk-bootstrap.override { inherit headless; }
+    else if bootstrapArgs ? gtkSupport then
+      jdk-bootstrap.override { gtkSupport = !headless; }
+    else
+      jdk-bootstrap;
 in
 
 stdenv.mkDerivation (finalAttrs: {
