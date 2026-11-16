@@ -47,7 +47,7 @@
   setJavaClassPath,
   versionCheckHook,
 
-  # JDK 27 is bootstrapped with the Temurin 26 binary.
+  # JDK 27 is bootstrapped with the Temurin 26 binary from nixpkgs.
   temurin-bin-26,
   jdk-bootstrap ? temurin-bin-26.__spliced.buildBuild or temurin-bin-26,
 

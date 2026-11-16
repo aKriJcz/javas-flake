@@ -24,7 +24,7 @@
     in
     {
       # The overlay is the reusable bit — add it to your own nixpkgs to get
-      # jdk26 / jdk27 / openjdk27 / temurin-bin-27 etc.
+      # jdk26 / jdk27 / openjdk26 / openjdk27.
       overlays.default = import ./overlay.nix;
 
       packages = forAllSystems (
