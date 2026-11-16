@@ -81,6 +81,7 @@ stdenv.mkDerivation (finalAttrs: {
   outputs = [ "out" ];
 
   patches = [
+    ./patches/fix-java-home-jdk27.patch
     ./patches/read-truststore-from-env-jdk25.patch
     ./patches/ignore-LegalNoticeFilePlugin-jdk18.patch
   ]
