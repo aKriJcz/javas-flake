@@ -61,13 +61,13 @@
 }:
 
 let
-  version = "27-ga";
+  version = "27.0.1.1-ga";
 
   src = fetchFromGitHub {
     owner = "openjdk";
     repo = "jdk27u";
-    rev = "refs/tags/jdk-27-ga";
-    hash = "sha256-78yt0uWHBiDyGzoRcXHSQhH/7/5yLKB8hRiB34n9VMM=";
+    rev = "refs/tags/jdk-27.0.1.1-ga";
+    hash = "sha256-U0Gf0wK19BRFA3DEEreEFLScZpJv2l3YDgEkD131vZY=";
   };
 
   # The boot JDK can be any package with a `home` attribute, chosen with
